@@ -3,7 +3,7 @@ import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 
-asda
+
 function App() {
 
   const times = [
