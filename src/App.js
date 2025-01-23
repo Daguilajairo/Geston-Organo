@@ -8,13 +8,11 @@ import { adicionarColaborador, obterColaboradores } from './firebase';  // Impor
 function App() {
 
   const times = [
-    { nome: 'Programação', corPrimaria: '#57c278', corSecundaria: '#d9f7e9' },
+    
     { nome: 'Front-End', corPrimaria: '#82cffa', corSecundaria: '#e8fbff' },
-    { nome: 'Data Science', corPrimaria: '#a6d157', corSecundaria: '#f0f8e2' },
-    { nome: 'Devops', corPrimaria: '#e09b69', corSecundaria: '#fde7eb' },
     { nome: 'UX e Design', corPrimaria: '#db6ebf', corSecundaria: '#fae9f5' },
-    { nome: 'Mobile', corPrimaria: '#ffba05', corSecundaria: '#fff5d9' },
-    { nome: 'Inovação e Gestão', corPrimaria: '#ff8a29', corSecundaria: '#ffeedf' },
+    { nome: 'Back-end', corPrimaria: '#ffba05', corSecundaria: '#fff5d9' },
+    { nome: 'Gestão', corPrimaria: '#ff8a29', corSecundaria: '#ffeedf' },
   ];
 
   const [colaboradores, setColaboradores] = useState([]);
