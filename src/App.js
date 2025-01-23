@@ -3,15 +3,12 @@ import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 import Rodape from './componentes/Rodape';
-import Login from './componentes/Login';
+import Login from './componentes/Login';  // Atualizando a importação para refletir o nome correto
 import { adicionarColaborador, obterColaboradores } from './firebase';
-
-// Adicionando a variável demoMode, que será controlada pela variável de ambiente
-const demoMode = process.env.REACT_APP_DEMO_MODE === 'true';
 
 function App() {
   const [colaboradores, setColaboradores] = useState([]);
-  const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [usuarioLogado, setUsuarioLogado] = useState(null);  // Estado para controlar o usuário logado
 
   const times = [
     { nome: 'Front-End', corPrimaria: '#82cffa', corSecundaria: '#e8fbff' },
@@ -21,10 +18,6 @@ function App() {
   ];
 
   const aoNovoColaboradorAdicionado = async (colaborador) => {
-    if (demoMode) {
-      alert("Modo demo: Não é possível adicionar colaboradores.");
-      return;
-    }
     await adicionarColaborador(colaborador);
     setColaboradores([...colaboradores, colaborador]);
   };
@@ -35,11 +28,11 @@ function App() {
   };
 
   const handleLoginSuccess = () => {
-    setUsuarioLogado(true);
+    setUsuarioLogado(true);  // Marca como logado
   };
 
   const handleLogout = () => {
-    setUsuarioLogado(null);
+    setUsuarioLogado(null);  // Marca como não logado
   };
 
   useEffect(() => {
@@ -49,29 +42,22 @@ function App() {
   return (
     <div className="App">
       <Banner />
-      {demoMode || usuarioLogado ? (
-        <div>
-          <h2 className='modo-demo'>Esse é o modo Demo - Edição e cadastro disponivel no modo Funcional!</h2>
-          {times.map((time) => (
+      {!usuarioLogado ? (
+        <Login onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <>
+          <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={aoNovoColaboradorAdicionado} />
+          {times.map(time => (
             <Time
               key={time.nome}
               nome={time.nome}
               corPrimaria={time.corPrimaria}
               corSecundaria={time.corSecundaria}
-              colaboradores={colaboradores.filter(
-                (colaborador) => colaborador.time === time.nome
-              )}
+              colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
             />
           ))}
-          {!demoMode && (
-            <>
-              <Formulario times={times.map((time) => time.nome)} aoColaboradorCadastrado={aoNovoColaboradorAdicionado} />
-              <button className="sair-button" onClick={handleLogout}>Sair</button>
-            </>
-          )}
-        </div>
-      ) : (
-        <Login onLoginSuccess={handleLoginSuccess} />
+          <button className="sair-button" onClick={handleLogout}>Sair</button>
+        </>
       )}
       <Rodape />
     </div>
