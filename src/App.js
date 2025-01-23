@@ -43,7 +43,6 @@ function App() {
       corSecundaria: '#ffeedf',
     },
   ];
-
   const [colaboradores, setColaboradores] = useState([]);
 
   const aoNovoColaboradorAdicionado = (colaborador) => {
