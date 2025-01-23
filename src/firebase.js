@@ -1,9 +1,8 @@
-// Importando as funções necessárias do SDK do Firebase
+// firebase.js
 import { initializeApp } from "firebase/app";
-// Importando funções do Firestore para interagir com o banco de dados
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
-// Configuração do Firebase (suas credenciais)
+// Sua configuração do Firebase (obtida no console do Firebase)
 const firebaseConfig = {
   apiKey: "AIzaSyDp78zwQ6Bq0ZiVjLtr3K6gmqS9tltrEhY",
   authDomain: "organo-geston.firebaseapp.com",
@@ -15,31 +14,25 @@ const firebaseConfig = {
 
 // Inicializando o Firebase
 const app = initializeApp(firebaseConfig);
+
 // Inicializando o Firestore
 const db = getFirestore(app);
 
-// Função para adicionar colaborador no Firestore
+// Função para adicionar um colaborador ao Firestore
 const adicionarColaborador = async (colaborador) => {
   try {
     await addDoc(collection(db, "colaboradores"), colaborador);
-    console.log("Colaborador adicionado com sucesso!");
   } catch (e) {
     console.error("Erro ao adicionar colaborador: ", e);
   }
 };
 
-// Função para obter todos os colaboradores
+// Função para buscar todos os colaboradores do Firestore
 const obterColaboradores = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(db, "colaboradores"));
-    const colaboradores = [];
-    querySnapshot.forEach((doc) => {
-      colaboradores.push({ ...doc.data(), id: doc.id });
-    });
-    return colaboradores;
-  } catch (e) {
-    console.error("Erro ao obter colaboradores: ", e);
-  }
+  const querySnapshot = await getDocs(collection(db, "colaboradores"));
+  const colaboradoresArray = querySnapshot.docs.map(doc => doc.data());
+  return colaboradoresArray;
 };
 
-export { adicionarColaborador, obterColaboradores };
+// Exportando as funções necessárias
+export { db, addDoc, collection, getDocs, adicionarColaborador, obterColaboradores };
