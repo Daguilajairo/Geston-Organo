@@ -1,17 +1,19 @@
 .login-container {
     display: flex;
+    flex-direction: column;
     justify-content:center;
     align-items: center;
     background-color: #3b55ef;
 }
 
 .login-container h2{
-    margin-right: 30px;
+    margin-left: 50px;
     color: rgb(255, 255, 255);
 }
 
 .login-container button{
     margin-left: 160px;
+    margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
     width: 100px;
@@ -27,11 +29,20 @@
 }
 
 .login-container input{
-   margin-top: 10px;
+   margin-top: 3px;
     margin-bottom: 10px;
     width: 300px;
     height: 30px;
     border-radius: 10px;
     border: 1px solid #ccc;
     margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+    .login-container button{
+        margin-left: 160px;
+    }
 }
