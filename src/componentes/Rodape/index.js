@@ -25,11 +25,7 @@ const Rodape = () => {
         <section>
             <img src="/imagens/imagens/logo.png" alt="" />
         </section>
-        <section>
-            <p>
-                Desenvolvido por Jairo D'aguila.
-            </p>
-        </section>
+        
     </footer>)
 }
 
